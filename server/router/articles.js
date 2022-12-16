@@ -16,11 +16,4 @@ router.post('/:articleId/comments', auth(), commentController.createCommentByArt
 router.put('/:articleId/comments/:commentId', auth(), commentController.editCommentByArticleId);
 router.delete('/:articleId/comments/:commentId', auth(), commentController.deleteCommentByArticleId);
 
-// router.post('/:themeId', auth(), commentController.createPost);
-// router.put('/:themeId', auth(), articleController.subscribe);
-// router.put('/:themeId/posts/:postId', auth(), commentController.editPost);
-// router.delete('/:themeId/posts/:postId', auth(), commentController.deletePost);
-
-// router.get('/my-trips/:id/reservations', auth(), articleController.getReservations);
-
 module.exports = router

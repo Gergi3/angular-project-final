@@ -1,5 +1,4 @@
 const { articleModel, userModel, commentModel } = require('../models');
-const { newPost } = require('./commentController')
 
 function getArticles(req, res, next) {
   articleModel.find({}, { comments: 0, description: 0, __v: 0 })
@@ -12,7 +11,7 @@ function getArticle(req, res, next) {
   const { articleId } = req.params;
 
   articleModel.findById(articleId, { __v: 0 })
-    .populate('comments') // TODO: Exclude bullshit stuff
+    .populate('comments') // TODO: Exclude stuff from comments population (decide later)
     .populate('user', '-password -__v -articles -comments -email')
     .then(article => res.json(article))
     .catch(next);
