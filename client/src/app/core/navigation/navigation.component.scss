@@ -1,0 +1,39 @@
+svg {
+  width: 200px;
+  font-size: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+mat-toolbar {
+  justify-content: space-between;
+  height: 74px;
+}
+
+mat-nav-list {
+  margin-left: 30px;
+  [mat-list-item] {
+    display: inline-block;
+    width: fit-content;
+    block-size: fit-content;
+    margin: 10px;
+    margin-bottom: 0px;
+    line-height: 48px;
+    border-radius: 4px;
+    text-align: center;
+    &::before {
+      content: initial;
+    }
+  }
+  .mat-list-item-title {
+    font-size: 1rem;
+  }
+  &.nav-right {
+    justify-self: flex-end;
+  }
+}
