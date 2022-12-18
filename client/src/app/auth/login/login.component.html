@@ -1,1 +1,27 @@
-<p>login works!</p>
+<form class="form" [formGroup]="loginForm" (ngSubmit)="loginHandler()">
+  <h2 class="form-title">Register</h2>
+  <div class="hint">* required fields</div>
+  <div class="login-failure" *ngIf="loginFailure$ | async">{{loginFailure$ | async}}</div>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input type="email" matInput placeholder="myprettyemail@mediary.com" formControlName="email" />
+    <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
+    <mat-error *ngIf="loginForm.get('email')?.hasError('pattern')">Email must be a valid email </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="password-form-field">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput formControlName="password" />
+    <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+    <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')
+      || loginForm.get('password')?.hasError('maxlength')">
+      Password should be between 5 and 50 characters
+    </mat-error>
+  </mat-form-field>
+
+  <div class="submit-btns">
+    <button mat-flat-button type="button" (click)="cancelHandler()">Cancel</button>
+    <button mat-flat-button color="primary">Login</button>
+  </div>
+</form>

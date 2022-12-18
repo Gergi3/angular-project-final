@@ -58,7 +58,11 @@ export class RegisterComponent {
     this.userModel.registerUserSuccess$.pipe(first())
       .subscribe(() => this.router.navigate(['/']));
 
-    this.userModel.registerUserFailure$.pipe(first(), tap(console.log))
+    this.userModel.registerUserFailure$.pipe(first())
       .subscribe(({ error }) => this.registerFailure$$.next(error?.error?.message || error?.message));
+  }
+
+  cancelHandler() {
+    this.router.navigate(['/']);
   }
 }

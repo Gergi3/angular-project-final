@@ -10,15 +10,8 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { StoreModule } from '@ngrx/store';
-import { userModuleStoreName as authModuleStoreName } from 's-+store-example/reducers';
-import { authReducers } from './+store/reducers';
-import { EffectsModule } from '@ngrx/effects';
-import { AuthModuleEffects } from './+store/effects';
-
-
 
 @NgModule({
   declarations: [
@@ -30,7 +23,7 @@ import { AuthModuleEffects } from './+store/effects';
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
-
+    FormsModule,
 
 
     // Materials

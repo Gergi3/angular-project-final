@@ -26,6 +26,10 @@ export class UserModel {
     this.loadUserFailure$.pipe(map(() => false))
   ).pipe(shareReplay(1));
 
+  loginUser$ = this.actions$.pipe(ofType(userActions.loginUser));
+  loginUserSuccess$ = this.actions$.pipe(ofType(userActions.loginUserSuccess));
+  loginUserFailure$ = this.actions$.pipe(ofType(userActions.loginUserFailure));
+
   registerUser$ = this.actions$.pipe(ofType(userActions.registerUser));
   registerUserSuccess$ = this.actions$.pipe(ofType(userActions.registerUserSuccess));
   registerUserFailure$ = this.actions$.pipe(ofType(userActions.registerUserFailure));
