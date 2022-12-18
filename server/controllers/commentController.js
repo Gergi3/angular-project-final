@@ -16,9 +16,9 @@ function getComments(req, res, next) {
 function getCommentsByArticleId(req, res, next) {
   const { articleId } = req.params;
 
-  commentModel.find({ article: articleId }, { article: 0, __v: 0 })
+  commentModel.find({ article: articleId }, { __v: 0 })
     .sort({ createdAt: -1 })
-    .populate('user', '-password -__v -articles -comments')
+    .populate('user', '-password -__v')
     .then(comments => res.status(200).json(comments))
     .catch(next);
 }

@@ -4,13 +4,15 @@ import { ArticleListComponent } from './article-list/article-list.component';
 
 const routes: Routes = [
   {
-    path: 'catalog',
+    path: '',
     component: ArticleListComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes),
+  ],
   exports: [RouterModule]
 })
 export class ArticlesRoutingModule { }

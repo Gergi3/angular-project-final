@@ -2,7 +2,7 @@ const { articleModel, userModel, commentModel } = require('../models');
 
 function getArticles(req, res, next) {
   articleModel.find({}, { comments: 0, description: 0, __v: 0 })
-    .populate('user', '-password -__v -articles -comments')
+    .populate('user', '-password -__v')
     .then(articles => res.json(articles))
     .catch(next);
 }
@@ -11,8 +11,7 @@ function getArticle(req, res, next) {
   const { articleId } = req.params;
 
   articleModel.findById(articleId, { __v: 0 })
-    .populate('comments') // TODO: Exclude stuff from comments population (decide later)
-    .populate('user', '-password -__v -articles -comments -email')
+    .populate('user', '-password -__v')
     .then(article => res.json(article))
     .catch(next);
 }

@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.error-container {
+  display: flex;
+  flex-direction: column;
+}
+.error-status {
+  height: 100px;
+  font-size: 10rem;
+  text-align: center;
+}
+
+.error-message {
+  text-align: center;
+  height: 30px;
+  font-size: 2rem;
+}

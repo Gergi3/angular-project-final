@@ -1,9 +1,10 @@
 .main-wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
 }
 
 .main-content {
+  align-self: stretch;
+  justify-self: stretch;
+
   flex-grow: 1;
 }

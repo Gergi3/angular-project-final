@@ -14,6 +14,18 @@ a {
 }
 
 .card-author-avatar {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba2.jpg');
+  background-image: url('/assets/user-icon.png');
+  background-size: cover;
+}
+
+.card-content {
+  margin-top: 10px;
+}
+
+.card-image {
+  width: 410px;
+  height: 270px;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
 }

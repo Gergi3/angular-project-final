@@ -9,6 +9,11 @@ import { ArticlesRoutingModule } from './articles-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleCardComponent } from './article-card/article-card.component';
+import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { ArticleModuleEffects } from './+store/effects';
+import { StoreModule } from '@ngrx/store';
+import { articleModuleStoreName, articleReducers } from './+store/reducers';
 
 
 
@@ -20,7 +25,12 @@ import { ArticleCardComponent } from './article-card/article-card.component';
   imports: [
     CommonModule,
     ArticlesRoutingModule,
+    HttpClientModule,
     SharedModule,
+
+    // Store
+    StoreModule.forFeature(articleModuleStoreName, articleReducers),    
+    EffectsModule.forFeature([ArticleModuleEffects]),
 
     // Materials
     MatCardModule,

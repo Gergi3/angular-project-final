@@ -10,26 +10,34 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { apiInterceptorProvider } from './interceptors/api.interceptor';
+import { HomeComponent } from './components/home/home.component';
+import { SharedModule } from '../shared/shared.module';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     NavigationComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
+    FontAwesomeModule,
+    SharedModule,
 
     // Materials
     MatToolbarModule,
     MatListModule,
     MatButtonModule,
     MatIconModule,
-    FontAwesomeModule
   ],
   exports: [
     NavigationComponent,
-    FooterComponent
-  ]
+    FooterComponent,
+  ],
+  providers: [apiInterceptorProvider],
 })
 export class CoreModule { }
