@@ -1,7 +1,9 @@
 <app-page-title text="All Articles"></app-page-title>
 
+<app-spinner *ngIf="isLoading$ | async"></app-spinner>
+
 <div class="container">
-  <mat-grid-list cols="3" gutterSize="65" rowHeight="430">
+  <mat-grid-list *ngIf="!(isLoading$ | async)" cols="3" gutterSize="65" rowHeight="430">
     <ul>
       <mat-grid-tile *ngFor="let article of articles$ | async">
         <li><app-article-card [article]="article"></app-article-card></li>

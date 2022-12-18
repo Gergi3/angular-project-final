@@ -1,18 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageTitleComponent } from './page-title/page-title.component';
 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import { PageTitleComponent } from './page-title/page-title.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 @NgModule({
   declarations: [
-    PageTitleComponent
+    PageTitleComponent,
+    SpinnerComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+
+    // Materials
+    MatProgressSpinnerModule
   ],
   exports: [
-    PageTitleComponent
+    PageTitleComponent,
+    SpinnerComponent
   ]
 })
 export class SharedModule { }

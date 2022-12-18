@@ -7,7 +7,7 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class ArticleModuleEffects {
 
-  loadUsers = createEffect(() => this.actions$.pipe(
+  loadArticles$ = createEffect(() => this.actions$.pipe(
     ofType(articleListActions.loadArticles),
     switchMap(() => this.articleService.getAll().pipe(
       takeUntil(this.actions$.pipe(ofType(articleListActions.loadArticlesCancel))),
