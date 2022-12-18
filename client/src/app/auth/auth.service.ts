@@ -22,6 +22,6 @@ export class AuthService {
   }
 
   getCurrentProfile() {
-    return this.http.get<IUser>('api/users/profile');
+    return this.http.get<IUser>('/api/users/profile');
   }
 }

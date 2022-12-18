@@ -20,7 +20,8 @@ export class ApiInterceptor implements HttpInterceptor {
     }
 
     request = request.clone({
-      url: request.url.replace('/api', environment.urls.getApiUrl())
+      url: request.url.replace('/api', environment.urls.getApiUrl()),
+      withCredentials: true
     })
     return next.handle(request);
   }

@@ -13,6 +13,8 @@ import { IUserLoginInfo, IUserRegisterInfo } from "src/app/core/interfaces/user"
 export class UserModel {
   user$ = this.store.select(userSelectors.user);
 
+  isLoggedIn$ = this.user$.pipe(switchMap(user => of(!!user)))
+
   loadUser$ = this.actions$.pipe(ofType(userActions.loadUser));
   loadUserSuccess$ = this.actions$.pipe(ofType(userActions.loadUserSuccess));
   loadUserFailure$ = this.actions$.pipe(ofType(userActions.loadUserFailure));
@@ -28,12 +30,9 @@ export class UserModel {
   registerUserSuccess$ = this.actions$.pipe(ofType(userActions.registerUserSuccess));
   registerUserFailure$ = this.actions$.pipe(ofType(userActions.registerUserFailure));
 
-  isRegistering$ = merge(
-    [true],
-    this.registerUser$.pipe(map(() => true)),
-    this.registerUserSuccess$.pipe(map(() => false)),
-    this.registerUserFailure$.pipe(map(() => false))
-  ).pipe(shareReplay(1));
+  logoutUser$ = this.actions$.pipe(ofType(userActions.logoutUser));
+  logoutUserSuccess$ = this.actions$.pipe(ofType(userActions.logoutUserSuccess));
+  logoutUserFailure$ = this.actions$.pipe(ofType(userActions.logoutUserFailure));
 
   constructor(
     private store: Store,

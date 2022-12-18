@@ -14,13 +14,15 @@ import { apiInterceptorProvider } from './interceptors/api.interceptor';
 import { HomeComponent } from './components/home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AuthenticateComponent } from './components/authenticate/authenticate.component';
 
 @NgModule({
   declarations: [
     NavigationComponent,
     FooterComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AuthenticateComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
   exports: [
     NavigationComponent,
     FooterComponent,
+    AuthenticateComponent
   ],
   providers: [apiInterceptorProvider],
 })

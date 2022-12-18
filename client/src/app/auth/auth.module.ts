@@ -31,9 +31,7 @@ import { AuthModuleEffects } from './+store/effects';
     AuthRoutingModule,
     ReactiveFormsModule,
 
-    // Store
-    StoreModule.forFeature(authModuleStoreName, authReducers),
-    EffectsModule.forFeature([AuthModuleEffects]),
+
 
     // Materials
     MatInputModule,

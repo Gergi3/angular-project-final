@@ -13,7 +13,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { authModuleStoreName, authReducers } from './auth/+store/reducers';
+import { AuthModuleEffects } from './auth/+store/effects';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     // Store
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
+    StoreModule.forFeature(authModuleStoreName, authReducers),
+    EffectsModule.forFeature([AuthModuleEffects]),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
 

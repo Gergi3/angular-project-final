@@ -14,26 +14,35 @@
     <a mat-button routerLink="/" class="nav-link">
       <span matListItemTitle class="nav-link-title">Home</span>
     </a>
+    
     <a mat-button routerLink="/articles" class="nav-link">
       <span matListItemTitle class="nav-link-title">Catalog</span>
     </a>
-    <a mat-button routerLink="/my-articles" class="nav-link">
-      <span matListItemTitle class="nav-link-title">My Articles</span>
-    </a>
+    <ng-template #loggedInMiddleNav>
+      <a mat-button routerLink="/my-articles" class="nav-link">
+        <span matListItemTitle class="nav-link-title">My Articles</span>
+      </a>
+    </ng-template>
+    <ng-container *ngIf="isLoggedIn$ | async; then loggedInMiddleNav"></ng-container>
   </mat-nav-list>
 
   <mat-nav-list class="nav nav-right">
-    <a mat-button routerLink="/auth/login" class="nav-link">
-      <span matListItemTitle class="nav-link-title">Login</span>
-    </a>
-    <a mat-button routerLink="/auth/register" class="nav-link">
-      <span matListItemTitle class="nav-link-title">Register</span>
-    </a>
-    <a mat-button routerLink="/auth/logout" class="nav-link">
-      <span matListItemTitle class="nav-link-title">Logout</span>
-    </a>
-    <a mat-button routerLink="/profile" class="nav-link">
-      <span matListItemTitle class="nav-link-title">Profile</span>
-    </a>
+    <ng-template #loggedInRightNav>
+      <a mat-button routerLink="/auth/logout" class="nav-link">
+        <span matListItemTitle class="nav-link-title">Logout</span>
+      </a>
+      <a mat-button routerLink="/profile" class="nav-link">
+        <span matListItemTitle class="nav-link-title">Profile</span>
+      </a>
+    </ng-template>
+    <ng-template #loggedOutRightNav>
+      <a mat-button routerLink="/auth/login" class="nav-link">
+        <span matListItemTitle class="nav-link-title">Login</span>
+      </a>
+      <a mat-button routerLink="/auth/register" class="nav-link">
+        <span matListItemTitle class="nav-link-title">Register</span>
+      </a>
+    </ng-template>
+    <ng-container *ngIf="isLoggedIn$ | async; then loggedInRightNav else loggedOutRightNav"></ng-container>
   </mat-nav-list>
 </mat-toolbar>
