@@ -25,7 +25,7 @@ import { AppComponent } from './app.component';
     CoreModule,
     HttpClientModule,
     FontAwesomeModule,
-    
+
     // Store
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),

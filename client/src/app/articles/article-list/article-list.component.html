@@ -1,9 +1,11 @@
-<app-page-title text="Articles"></app-page-title>
+<app-page-title text="All Articles"></app-page-title>
 
 <div class="container">
   <mat-grid-list cols="3" gutterSize="65" rowHeight="430">
-    <mat-grid-tile *ngFor="let article of articles$ | async">
-      <app-article-card [article]="article"></app-article-card>
-    </mat-grid-tile>
+    <ul>
+      <mat-grid-tile *ngFor="let article of articles$ | async">
+        <li><app-article-card [article]="article"></app-article-card></li>
+      </mat-grid-tile>
+    </ul>
   </mat-grid-list>
 </div>

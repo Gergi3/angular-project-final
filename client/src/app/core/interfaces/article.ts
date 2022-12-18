@@ -1,4 +1,3 @@
-import { IComment } from "./comment"
 import { IUser } from "./user"
 
 export interface IArticle {

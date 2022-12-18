@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticleService } from '../article.service';
 import { Store } from '@ngrx/store';
 import { articleListActions } from '../+store/actions';
-import { IArticle } from 'src/app/core/interfaces/article';
 import { articleListSelectors } from '../+store/selectors';
 
 @Component({
@@ -11,9 +9,8 @@ import { articleListSelectors } from '../+store/selectors';
   styleUrls: ['./article-list.component.scss']
 })
 export class ArticleListComponent implements OnInit {
-  
   articles$ = this.store.select(articleListSelectors.articleList);
-  
+
   constructor(private store: Store) { }
 
   ngOnInit() {

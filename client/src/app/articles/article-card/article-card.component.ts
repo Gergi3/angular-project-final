@@ -6,12 +6,12 @@ import { IArticle } from 'src/app/core/interfaces/article';
   templateUrl: './article-card.component.html',
   styleUrls: ['./article-card.component.scss']
 })
-export class ArticleCardComponent  {
+export class ArticleCardComponent {
   @Input() article!: IArticle;
-  
-  defaultImageUrl =`/assets/placeholder-600x400.webp`;
 
-  getImageStylings() {
-    return `background-image: url("${this.article.imageUrl || this.defaultImageUrl}")` 
-  } 
+  defaultImageUrl = `/assets/placeholder-600x400.webp`;
+
+  get cardImageStyle() {
+    return `background-image: url("${this.article.imageUrl || this.defaultImageUrl}")`
+  }
 }

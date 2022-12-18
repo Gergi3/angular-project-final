@@ -29,7 +29,7 @@ import { articleModuleStoreName, articleReducers } from './+store/reducers';
     SharedModule,
 
     // Store
-    StoreModule.forFeature(articleModuleStoreName, articleReducers),    
+    StoreModule.forFeature(articleModuleStoreName, articleReducers),
     EffectsModule.forFeature([ArticleModuleEffects]),
 
     // Materials

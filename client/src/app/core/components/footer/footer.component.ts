@@ -13,5 +13,5 @@ export class FooterComponent {
     { link: 'https://www.linkedin.com/', ref: faLinkedin },
     { link: 'https://www.youtube.com/', ref: faYoutube },
     { link: 'https://www.tiktok.com/', ref: faTiktok }
-  ]
+  ];
 }
