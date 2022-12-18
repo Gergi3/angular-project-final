@@ -10,7 +10,7 @@ import { filter, first, map, merge, shareReplay } from "rxjs";
   providedIn: 'root'
 })
 export class ArticleListModel {
-  articles$ = this.store.select(articleListSelectors.articleList)
+  articles$ = this.store.select(articleListSelectors.articleList);
 
   loadArticles$ = this.actions$.pipe(ofType(articleListActions.loadArticles));
   loadArticlesSuccess$ = this.actions$.pipe(ofType(articleListActions.loadArticlesSuccess));
@@ -21,7 +21,7 @@ export class ArticleListModel {
     this.loadArticles$.pipe(map(() => true)),
     this.loadArticlesSuccess$.pipe(map(() => false)),
     this.loadArticlesFailure$.pipe(map(() => false))
-  ).pipe(shareReplay(0));
+  ).pipe(shareReplay(1));
 
   constructor(
     private store: Store,
@@ -41,10 +41,9 @@ export class ArticleListModel {
   }
 
   handleDestroy() {
-    this.isLoading$.subscribe(isLoading => {
-      isLoading
-        ? this.loadArticlesCancel()
-        : this.loadArticlesClear()
-    });
+    this.isLoading$.pipe(first(), filter(isLoading => !!isLoading))
+      .subscribe(() => this.loadArticlesCancel())
+      .unsubscribe();
+    this.loadArticlesClear();
   }
 }

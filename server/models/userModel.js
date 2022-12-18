@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    email: true
   },
   username: {
     type: String,
@@ -31,6 +32,15 @@ const userSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: String,
+    minlength: [10, 'Phone Number should be exactly 10 characters'],
+    maxlength: [10, 'Phone Number should be exactly 10 characters'],
+    validate: {
+      validator: function(v) {
+        if (v === null) { return true; }
+        return /^[0-9]+$/g.test(v);
+      },
+      message: () => 'Phone Number should contain only digits!'
+    }
   },
   isMale: {
     type: Boolean

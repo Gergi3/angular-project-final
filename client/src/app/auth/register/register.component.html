@@ -1,1 +1,71 @@
-<p>register works!</p>
+<form class="form" [formGroup]="registerForm" (ngSubmit)="registerHandler()">
+  <h2 class="form-title">Register</h2>
+  <div class="hint">* required fields</div>
+  <div class="register-failure" *ngIf="registerFailure$ | async">{{registerFailure$ | async}}</div>
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput placeholder="CoolNickname123" formControlName="username" />
+    <mat-error *ngIf="registerForm.get('username')?.hasError('required')">Username is required</mat-error>
+    <mat-error *ngIf="registerForm.get('username')?.hasError('minlength')
+      || registerForm.get('username')?.hasError('maxlength')">
+      Username should be between 5 and 50 characters
+    </mat-error>
+    <mat-error *ngIf="registerForm.get('username')?.hasError('pattern')">Username should contain only latin letters and
+      digits!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input type="email" matInput placeholder="myprettyemail@mediary.com" formControlName="email" />
+    <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Email is required</mat-error>
+    <mat-error *ngIf="registerForm.get('email')?.hasError('pattern')">Email must be a valid email </mat-error>
+  </mat-form-field>
+
+  <div formGroupName="passwords">
+    <mat-form-field class="password-form-field">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password" />
+      <mat-error *ngIf="registerForm.get('passwords.password')?.hasError('required')">Password is required</mat-error>
+      <mat-error *ngIf="registerForm.get('passwords.password')?.hasError('minlength')
+        || registerForm.get('passwords.password')?.hasError('maxlength')">
+        Password should be between 5 and 50 characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="repassword-form-field">
+      <mat-label>Re-Password</mat-label>
+      <input type="password" matInput formControlName="rePassword" />
+      <mat-error *ngIf="registerForm.get('passwords.rePassword')?.hasError('required')">Re-Password is
+        required</mat-error>
+    </mat-form-field>
+    <mat-error class="passwords-error" *ngIf="unconfirmedPasswords">
+      Re-Password should match Password
+    </mat-error>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Phone Number</mat-label>
+    <input matInput placeholder="0894356787" formControlName="phoneNumber" />
+    <mat-error *ngIf="registerForm.get('phoneNumber')?.hasError('minlength')
+      || registerForm.get('phoneNumber')?.hasError('maxlength')">
+      Phone Number should be exactly 10 characters
+    </mat-error>
+    <mat-error *ngIf="registerForm.get('phoneNumber')?.hasError('pattern')">
+      Phone Number should contain only digits
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Gender</mat-label>
+    <mat-select formControlName="isMale" [value]="null">
+      <mat-option [value]="null"></mat-option>
+      <mat-option [value]="true">Male</mat-option>
+      <mat-option [value]="false">Female</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="submit-btns">
+    <button mat-flat-button>Cancel</button>
+    <button mat-flat-button color="primary">Register</button>
+  </div>
+</form>

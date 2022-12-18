@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.form {
+  padding: 20px;
+  min-width: 600px;
+  min-height: 600px;
+  border: 1px solid #4a4a4a;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.password-form-field {
+  width: 49%;
+  margin-right: 2%;
+}
+.repassword-form-field {
+  width: 49%;
+}
+
+.hint {
+  display: block;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 5px;
+}
+.register-failure {
+  color: red;
+  margin-bottom: 5px;
+}
+
+.passwords-error{
+  text-align: center;
+}
+
+.submit-btns {
+  display: flex;
+  justify-content: flex-end;
+
+  button:not(:last-of-type) {
+    margin-right: 12px;
+  }
+}

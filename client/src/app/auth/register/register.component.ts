@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { confirmPasswordsValidator } from 'src/app/core/validators/confirm-passwords.validator';
+import { emailValidators, passwordValidators, phoneNumberValidators, rePasswordValidators, usernameValidators } from 'src/app/core/validators/reactive-validators';
+import { UserModel } from '../+store/models';
+import { IUserLoginInfo, IUserRegisterInfo } from 'src/app/core/interfaces/user';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, filter, first, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -7,4 +14,51 @@ import { Component } from '@angular/core';
 })
 export class RegisterComponent {
 
+  private registerFailure$$ = new BehaviorSubject<string | null>(null);
+  registerFailure$ = this.registerFailure$$.asObservable()
+
+  registerForm = this.fb.group({
+    email: ['', emailValidators],
+    username: ['', usernameValidators],
+    passwords: this.fb.group({
+      password: ['', passwordValidators],
+      rePassword: ['', rePasswordValidators],
+    }, { validator: confirmPasswordsValidator }),
+    phoneNumber: ['', phoneNumberValidators],
+    isMale: ''
+  });
+
+  get unconfirmedPasswords() {
+    return this.registerForm.get('passwords')?.hasError('confirmPasswords');
+  }
+
+  constructor(
+    private fb: FormBuilder,
+    private userModel: UserModel,
+    private router: Router
+  ) { }
+
+  registerHandler() {
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
+    const { email, username, passwords: { password, }, phoneNumber, isMale } = this.registerForm.value;
+
+    const userInfo: IUserRegisterInfo = {
+      email: email!,
+      username: username!,
+      password: password!,
+      phoneNumber: phoneNumber || null,
+      isMale: isMale === null || isMale === '' || isMale === undefined ? null : !!isMale
+    }
+    this.userModel.registerUser(userInfo);
+
+    this.userModel.registerUserSuccess$.pipe(first())
+      .subscribe(() => this.router.navigate(['/']));
+
+    this.userModel.registerUserFailure$.pipe(first(), tap(console.log))
+      .subscribe(({ error }) => this.registerFailure$$.next(error?.error?.message || error?.message));
+  }
 }
