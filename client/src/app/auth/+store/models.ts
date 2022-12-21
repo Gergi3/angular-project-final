@@ -30,9 +30,23 @@ export class UserModel {
   loginUserSuccess$ = this.actions$.pipe(ofType(userActions.loginUserSuccess));
   loginUserFailure$ = this.actions$.pipe(ofType(userActions.loginUserFailure));
 
+  isLoggingIn$ = merge(
+    [false],
+    this.loginUser$.pipe(map(() => true)),
+    this.loginUserSuccess$.pipe(map(() => false)),
+    this.loginUserFailure$.pipe(map(() => false))
+  ).pipe(shareReplay(1));
+
   registerUser$ = this.actions$.pipe(ofType(userActions.registerUser));
   registerUserSuccess$ = this.actions$.pipe(ofType(userActions.registerUserSuccess));
   registerUserFailure$ = this.actions$.pipe(ofType(userActions.registerUserFailure));
+
+  isRegistering$ = merge(
+    [false],
+    this.registerUser$.pipe(map(() => true)),
+    this.registerUserSuccess$.pipe(map(() => false)),
+    this.registerUserFailure$.pipe(map(() => false))
+  ).pipe(shareReplay(1));
 
   logoutUser$ = this.actions$.pipe(ofType(userActions.logoutUser));
   logoutUserSuccess$ = this.actions$.pipe(ofType(userActions.logoutUserSuccess));

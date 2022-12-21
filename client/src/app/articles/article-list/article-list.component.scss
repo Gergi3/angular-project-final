@@ -9,3 +9,10 @@ ul {
   justify-content: space-around;
   gap: 20px;
 }
+
+.spinner {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

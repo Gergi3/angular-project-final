@@ -14,7 +14,9 @@ import { emailValidators, passwordValidators } from 'src/app/core/validators/rea
 })
 export class LoginComponent {
   private loginFailure$$ = new BehaviorSubject<string | null>(null);
-  loginFailure$ = this.loginFailure$$.asObservable()
+  
+  loginFailure$ = this.loginFailure$$.asObservable();
+  isLoggingIn$ = this.userModel.isLoggingIn$;
 
   loginForm = this.fb.group({
     email: ['', emailValidators],

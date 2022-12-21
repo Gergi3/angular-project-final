@@ -1,9 +1,9 @@
 <app-page-title text="All Articles"></app-page-title>
 
-<app-spinner *ngIf="isLoading$ | async"></app-spinner>
 
-<div class="content-container" *ngIf="!(isLoading$ | async)">
-  <ul class="content-flex">
+<div class="content-container">
+  <app-spinner class="spinner" *ngIf="isLoading$ | async"></app-spinner>
+  <ul class="content-flex" *ngIf="!(isLoading$ | async)">
     <li class="content-flex-item" *ngFor="let article of articles$ | async">
       <app-article-card [article]="article"></app-article-card>
     </li>

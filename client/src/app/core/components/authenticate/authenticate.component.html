@@ -1,2 +1,4 @@
-<app-spinner *ngIf="userModel.isLoading$ | async"></app-spinner>
+<div class="spinner-container" *ngIf="userModel.isLoading$ | async">
+  <app-spinner></app-spinner>
+</div>
 <ng-content *ngIf="!(userModel.isLoading$ | async)"></ng-content>

@@ -16,6 +16,7 @@ export class RegisterComponent {
 
   private registerFailure$$ = new BehaviorSubject<string | null>(null);
   registerFailure$ = this.registerFailure$$.asObservable()
+  isRegistering$ = this.userModel.isRegistering$;
 
   registerForm = this.fb.group({
     email: ['', emailValidators],

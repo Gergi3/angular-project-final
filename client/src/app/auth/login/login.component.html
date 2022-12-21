@@ -1,4 +1,7 @@
-<form class="form" [formGroup]="loginForm" (ngSubmit)="loginHandler()">
+<div class="spinner-container" *ngIf="isLoggingIn$ | async">
+  <app-spinner></app-spinner>
+</div>
+<form *ngIf="!(isLoggingIn$ | async)" class="form" [formGroup]="loginForm" (ngSubmit)="loginHandler()">
   <h2 class="form-title">Login</h2>
   <div class="hint">* required fields</div>
   <div class="login-failure" *ngIf="loginFailure$ | async">{{loginFailure$ | async}}</div>

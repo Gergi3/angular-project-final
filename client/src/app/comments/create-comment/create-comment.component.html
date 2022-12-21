@@ -1,7 +1,7 @@
 <form class="example-form" [formGroup]="commentForm" (ngSubmit)="commentHandler()">
   <mat-form-field class="example-full-width">
-    <mat-label>Leave a comment</mat-label>
-    <textarea 
+    <mat-label>{{(isLoggedIn$ | async) ? 'Leave a comment' : 'You need to login to comment'}}</mat-label>
+    <textarea
       [errorStateMatcher]="textErrorStateMatcher"
       matInput 
       placeholder="It makes me feel..." [rows]="4"
@@ -14,7 +14,7 @@
 
   <div class="submit-btns">
     <button
-      [disabled]="(commentForm.invalid && commentForm.touched) || (isCreatingComment$ | async)"
+      [disabled]="(commentForm.invalid && commentForm.touched) || (isCreatingComment$ | async) || !(isLoggedIn$ | async)"
       mat-flat-button
       color="primary">
       Comment
