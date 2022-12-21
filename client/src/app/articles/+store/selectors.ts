@@ -7,3 +7,8 @@ const getArticleList = createSelector(getArticleState, (state) => state.articleL
 export const articleListSelectors = {
   articleList: getArticleList
 }
+
+const getArticleDetails = createSelector(getArticleState, (state) => state.articleDetailsState.articleDetails)
+export const articleDetailsSelectors = {
+  articleDetails: getArticleDetails
+}

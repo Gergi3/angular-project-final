@@ -1,6 +1,6 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ArticleService } from "../article.service";
-import { articleListActions } from "./actions";
+import { articleDetailsActions, articleListActions } from "./actions";
 import { takeUntil, map, switchMap, catchError, mergeMap } from "rxjs";
 import { Injectable } from "@angular/core";
 
@@ -13,6 +13,15 @@ export class ArticleModuleEffects {
       takeUntil(this.actions$.pipe(ofType(articleListActions.loadArticlesCancel))),
       map(articles => articleListActions.loadArticlesSuccess({ articles })),
       catchError(error => [articleListActions.loadArticlesFailure({ error })])
+    ))
+  ));
+
+  loadArticle$ = createEffect(() => this.actions$.pipe(
+    ofType(articleDetailsActions.loadArticle),
+    switchMap(({ id }) => this.articleService.getById(id).pipe(
+      takeUntil(this.actions$.pipe(ofType(articleDetailsActions.loadArticleCancel))),
+      map(article => articleDetailsActions.loadArticleSuccess({ article })),
+      catchError(error => [articleDetailsActions.loadArticleFailure({ error })])
     ))
   ));
 

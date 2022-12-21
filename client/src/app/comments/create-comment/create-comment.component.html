@@ -1,0 +1,23 @@
+<form class="example-form" [formGroup]="commentForm" (ngSubmit)="commentHandler()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Leave a comment</mat-label>
+    <textarea 
+      [errorStateMatcher]="textErrorStateMatcher"
+      matInput 
+      placeholder="It makes me feel..." [rows]="4"
+      formControlName="text">
+    </textarea>
+    <mat-error *ngIf="commentForm.get('text')?.hasError('required')">
+      A message is required to comment.
+    </mat-error>
+  </mat-form-field>
+
+  <div class="submit-btns">
+    <button
+      [disabled]="(commentForm.invalid && commentForm.touched) || (isCreatingComment$ | async)"
+      mat-flat-button
+      color="primary">
+      Comment
+    </button>
+  </div>
+</form>

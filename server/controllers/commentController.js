@@ -28,7 +28,7 @@ function createCommentByArticleId(req, res, next) {
   const { text } = req.body;
   const { _id: userId } = req.user;
 
-  commentModel.create({ text, user: userId, article: articleId })
+  commentModel.create({ text: text, user: userId, article: articleId }  )
     .then(comment => {
       return Promise.all([
         comment,
@@ -38,7 +38,10 @@ function createCommentByArticleId(req, res, next) {
     })
     .then(([comment, userResult, articleResult]) => {
       if (comment && userResult.ok === 1 && articleResult.ok === 1) {
-        res.status(200).json(comment);
+        commentModel.findOne({ _id: comment._id }, { __v: 0 })
+          .populate('user', '-pasword -__v')
+          .then(commentPopulated => res.status(200).json(commentPopulated))
+          .catch(err => res.status(401).json({ message: 'Not allowed' }))
       } else {
         res.status(401).json({ message: 'Not allowed' })
       }

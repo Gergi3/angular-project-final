@@ -57,7 +57,6 @@ a {
   background-color: hsl(0, 0%, 60%);
   &:hover {
     background-color: hsl(0, 0%, 70%);
-
   }
 }
 
@@ -65,4 +64,17 @@ a {
 .mat-drawer-content.mat-sidenav-content,
 .mat-drawer-backdrop {
   height: 100%;
+}
+
+.content-container {
+  margin: 0 auto;
+  width: 1100px;
+}
+
+*:not(input, body, html, head, ::-webkit-scrollbar) {
+  overflow: hidden;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
 }

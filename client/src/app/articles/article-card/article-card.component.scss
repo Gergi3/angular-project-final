@@ -1,5 +1,6 @@
 * {
   width: 100%;
+  word-break: break-word;
 }
 
 a {
@@ -12,6 +13,10 @@ a {
   }
 }
 
+.card {
+  width: 310px;
+}
+
 .card-author-avatar {
   background-image: url('/assets/user-icon.png');
   background-size: cover;
@@ -22,9 +27,13 @@ a {
 }
 
 .card-image {
-  width: 410px;
+  width: 310px;
   height: 270px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.card-author {
+  margin-bottom: 10px;
 }

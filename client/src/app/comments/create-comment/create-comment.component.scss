@@ -1,0 +1,17 @@
+form {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.submit-btns {
+  display: flex;
+  justify-content: flex-end;
+
+  button:not(:last-of-type) {
+    margin-right: 12px;
+  }
+}

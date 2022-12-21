@@ -14,6 +14,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { ArticleModuleEffects } from './+store/effects';
 import { StoreModule } from '@ngrx/store';
 import { articleModuleStoreName, articleReducers } from './+store/reducers';
+import { ArticleDetailsComponent } from './article-details/article-details.component';
+import { CommentsModule } from '../comments/comments.module';
 
 
 
@@ -21,12 +23,14 @@ import { articleModuleStoreName, articleReducers } from './+store/reducers';
   declarations: [
     ArticleListComponent,
     ArticleCardComponent,
+    ArticleDetailsComponent,
   ],
   imports: [
     CommonModule,
     ArticlesRoutingModule,
     HttpClientModule,
     SharedModule,
+    CommentsModule,
 
     // Store
     StoreModule.forFeature(articleModuleStoreName, articleReducers),

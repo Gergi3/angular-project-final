@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { articleListSelectors } from "./selectors";
-import { articleListActions } from "./actions";
+import { articleDetailsSelectors, articleListSelectors } from "./selectors";
+import { articleDetailsActions, articleListActions } from "./actions";
 import { Actions, ofType } from "@ngrx/effects";
 import { filter, first, map, merge, shareReplay } from "rxjs";
 
@@ -43,7 +43,47 @@ export class ArticleListModel {
   handleDestroy() {
     this.isLoading$.pipe(first(), filter(isLoading => !!isLoading))
       .subscribe(() => this.loadArticlesCancel())
-      .unsubscribe();
     this.loadArticlesClear();
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ArticleDetailsModel {
+  article$ = this.store.select(articleDetailsSelectors.articleDetails);
+
+  loadArticle$ = this.actions$.pipe(ofType(articleDetailsActions.loadArticle));
+  loadArticleSuccess$ = this.actions$.pipe(ofType(articleDetailsActions.loadArticleSuccess));
+  loadArticleFailure$ = this.actions$.pipe(ofType(articleDetailsActions.loadArticleFailure));
+
+  isLoading$ = merge(
+    [true],
+    this.loadArticle$.pipe(map(() => true)),
+    this.loadArticleSuccess$.pipe(map(() => false)),
+    this.loadArticleFailure$.pipe(map(() => false))
+  ).pipe(shareReplay(1));
+
+  constructor(
+    private store: Store,
+    private actions$: Actions
+  ) { }
+
+  loadArticle(id: string) {
+    this.store.dispatch(articleDetailsActions.loadArticle({ id }));
+  }
+
+  loadArticleClear() {
+    this.store.dispatch(articleDetailsActions.loadArticleClear());
+  }
+
+  loadArticleCancel() {
+    this.store.dispatch(articleDetailsActions.loadArticleCancel());
+  }
+
+  handleDestroy() {
+    this.isLoading$.pipe(first(), filter(isLoading => !!isLoading))
+      .subscribe(() => this.loadArticleCancel())
+    this.loadArticleClear();
   }
 }

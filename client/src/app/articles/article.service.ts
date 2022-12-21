@@ -12,4 +12,8 @@ export class ArticleService {
   getAll() {
     return this.http.get<IArticle[]>('/api/articles');
   }
+
+  getById(id: string) {
+    return this.http.get<IArticle>('/api/articles/' + id);
+  }
 }

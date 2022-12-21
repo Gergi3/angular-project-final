@@ -1,0 +1,12 @@
+<div class="spinner-container" *ngIf="isLoading$ | async">
+  <app-spinner></app-spinner>
+</div>
+<div class="content-container" *ngIf="!(isLoading$ | async)">
+  <div class="article-img" [style]="'background-image: url(' + (article$ | async)?.imageUrl + ');'"></div>
+  <div class="article-content">
+    <h1 class="article-title">{{(article$ | async)?.title}}</h1>
+    <div class="article-summary">{{(article$ | async)?.summary}}</div>
+    <div class="article-description">{{(article$ | async)?.description}}</div>
+  </div>
+  <app-comments-section [articleId]="(article$ | async)?._id!"></app-comments-section>
+</div>

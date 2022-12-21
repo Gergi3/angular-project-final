@@ -1,0 +1,33 @@
+.content-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.article-img {
+  height: 600px;
+  background-size: cover;
+  border-radius: 20px;
+}
+
+.article-title {
+  font-size: 4rem;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.article-summary {
+  font-size: 1.4rem;
+  margin-bottom: 50px;
+}
+
+.article-description {
+  font-size: 0.9rem;
+}
+
+.spinner-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

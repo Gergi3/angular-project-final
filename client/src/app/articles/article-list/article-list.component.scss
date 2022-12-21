@@ -1,4 +1,11 @@
-.container {
-  margin: 0 auto;
-  width: 1380px;
+ul {
+  list-style: none;
+}
+
+.content-flex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 20px;
 }

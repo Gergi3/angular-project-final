@@ -2,12 +2,10 @@
 
 <app-spinner *ngIf="isLoading$ | async"></app-spinner>
 
-<div class="container">
-  <mat-grid-list *ngIf="!(isLoading$ | async)" cols="3" gutterSize="65" rowHeight="430">
-    <ul>
-      <mat-grid-tile *ngFor="let article of articles$ | async">
-        <li><app-article-card [article]="article"></app-article-card></li>
-      </mat-grid-tile>
-    </ul>
-  </mat-grid-list>
+<div class="content-container" *ngIf="!(isLoading$ | async)">
+  <ul class="content-flex">
+    <li class="content-flex-item" *ngFor="let article of articles$ | async">
+      <app-article-card [article]="article"></app-article-card>
+    </li>
+  </ul>
 </div>

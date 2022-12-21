@@ -36,7 +36,7 @@ mat-form-field {
   margin-bottom: 5px;
 }
 .register-failure {
-  color: red;
+  color: var(--mdc-theme-error, #f44336);
   margin-bottom: 5px;
 }
 
