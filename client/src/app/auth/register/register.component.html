@@ -3,6 +3,7 @@
 </div>
 <form class="form" [formGroup]="registerForm" (ngSubmit)="registerHandler()" *ngIf="!(isRegistering$ | async)">
   <h2 class="form-title">Register</h2>
+  <div class="hint">* required fields</div>
   <div class="register-failure" *ngIf="registerFailure">{{registerFailure}}</div>
   <mat-form-field appearance="fill">
     <mat-label>Username</mat-label>

@@ -18,12 +18,19 @@
     <a mat-button routerLink="/articles" class="nav-link">
       <span matListItemTitle class="nav-link-title">Catalog</span>
     </a>
-    <ng-template #loggedInMiddleNav>
-      <a mat-button routerLink="/my-articles" class="nav-link">
-        <span matListItemTitle class="nav-link-title">My Articles</span>
+    <ng-container *ngIf="isLoggedIn$ | async" >
+      <a mat-button class="nav-link" [matMenuTriggerFor]="menu">
+        <span matListItemTitle class="nav-link-title">Articles <fa-icon [icon]="arrowDownIcon"></fa-icon></span>
       </a>
-    </ng-template>
-    <ng-container *ngIf="isLoggedIn$ | async; then loggedInMiddleNav"></ng-container>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item routerLink="/my-articles" class="nav-link">
+          <span matListItemTitle class="nav-link-title">My Articles</span>
+        </a>
+        <a mat-menu-item routerLink="/articles/create" class="nav-link">
+          <span matListItemTitle class="nav-link-title">Create Article</span>
+        </a>
+      </mat-menu>
+    </ng-container>
   </mat-nav-list>
 
   <mat-nav-list class="nav nav-right">
