@@ -3,9 +3,8 @@
 <p>
 The web application is about an open media for posting articles. <br />
 You can login, register, logout. <br />
-There are pages with catalog for articles, article details page, create article, my-articles, delete articlee and edit article. <br />
-The static pages are Contact us and About us. <br />
-Features like pagination, and "show more" button for revealing articles each time its clicked. <br />
+There are pages with catalog for articles, article details page, create article, my-articles, delete articlee and edit article.<br />
+You can comment on articles delete/edit them <br />
 
 # To start app
 OPEN TERMINAL <br />
