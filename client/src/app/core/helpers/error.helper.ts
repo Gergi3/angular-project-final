@@ -8,7 +8,7 @@ const defaultErrorMessage = 'An error occurred while trying to do this action, p
 })
 export class ErrorHelper {
   getApiError(error: any, defaultMessage: string = defaultErrorMessage): string {
-    const errMessage = error?.error?.err?.error?.message 
+    const errMessage = error?.error?.err?.error?.message
       || error.error?.error?.message
       || error.error?.message
       || error.error?.messages?.join('\n')

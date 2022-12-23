@@ -15,7 +15,7 @@ import { ErrorHelper } from 'src/app/core/helpers/error.helper';
 })
 export class LoginComponent {
   private loginFailure$$ = new BehaviorSubject<string | null>(null);
-  
+
   loginFailure$ = this.loginFailure$$.asObservable();
   isLoggingIn$ = this.userModel.isLoggingIn$;
 

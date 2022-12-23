@@ -5,6 +5,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .form {
   padding: 20px;
   min-width: 600px;
@@ -26,6 +27,7 @@ mat-form-field {
   width: 49%;
   margin-right: 2%;
 }
+
 .repassword-form-field {
   width: 49%;
 }
@@ -35,12 +37,13 @@ mat-form-field {
   color: rgba(255, 255, 255, 0.4);
   margin-bottom: 5px;
 }
+
 .register-failure {
   color: var(--mdc-theme-error, #f44336);
   margin-bottom: 5px;
 }
 
-.passwords-error{
+.passwords-error {
   text-align: center;
 }
 
@@ -52,6 +55,7 @@ mat-form-field {
     margin-right: 12px;
   }
 }
+
 .spinner-container {
   display: flex;
   align-items: center;

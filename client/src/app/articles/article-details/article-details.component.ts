@@ -16,7 +16,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private articleDetailsModel: ArticleDetailsModel,
   ) { }
-  
+
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('articleId')!;
     this.articleDetailsModel.loadArticle(id);

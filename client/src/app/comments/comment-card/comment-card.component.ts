@@ -17,11 +17,11 @@ export class CommentCardComponent implements OnInit {
   isLoggedIn$ = this.userModel.isLoggedIn$;
   isEditing$ = this.commentModel.isEditing$;
   isDeleting$ = this.commentModel.isDeleting$;
-  
+
   editForm = this.fb.group({
     text: [this.comment?.text, [Validators.required]]
   });
-  
+
   actionFailure: string | null = null;
   isOwner = false;
   isDelete = false;

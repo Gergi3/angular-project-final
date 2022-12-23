@@ -19,7 +19,7 @@ export class CreateCommentComponent implements OnInit {
 
   isCreatingComment$ = this.commentModel.isCreating$;
   isLoggedIn$ = this.userModel.isLoggedIn$;
-  
+
   commentForm = this.fb.group({
     text: ['', [Validators.required]]
   });
