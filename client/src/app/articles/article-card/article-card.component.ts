@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { first } from 'rxjs';
 import { UserModel } from 'src/app/auth/+store/models';
-
+import { defaultImageUrl } from 'src/app/core/constants';
 import { IArticle } from 'src/app/core/interfaces/article';
 
 @Component({
@@ -10,14 +11,13 @@ import { IArticle } from 'src/app/core/interfaces/article';
   styleUrls: ['./article-card.component.scss']
 })
 export class ArticleCardComponent implements OnInit {
-  
+
   @Input() article!: IArticle;
 
   isOwner: boolean = false;
-  defaultImageUrl = '/assets/placeholder-600x400.webp';
 
   get cardImageStyle() {
-    return `background-image: url("${this.article.imageUrl || this.defaultImageUrl}")`;
+    return `background-image: url("${this.article.imageUrl || defaultImageUrl}")`;
   }
 
   constructor(

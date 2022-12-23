@@ -24,7 +24,10 @@ const articleSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: function (v) {
-        return /^https?:\/\/.+/g.test(v);
+        if (v) {
+          return /^https?:\/\/.+/g.test(v);
+        }
+        return true;
       },
       message: props => `${props.value} must be a valid url!`
     },

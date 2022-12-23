@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleDetailsModel } from '../+store/models';
 import { first } from 'rxjs';
 import { UserModel } from 'src/app/auth/+store/models';
+import { defaultImageUrl } from 'src/app/core/constants';
 
 @Component({
   selector: 'app-article-details',
@@ -14,7 +15,8 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
 
   article$ = this.articleDetailsModel.article$;
   isLoading$ = this.articleDetailsModel.isLoading$;
-
+  
+  defaultImageUrl = defaultImageUrl
   isOwner: boolean = false;
 
   constructor(

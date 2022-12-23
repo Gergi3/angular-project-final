@@ -1,6 +1,6 @@
 import { Validators } from "@angular/forms";
 
-import { emailRegex, phoneNumberRegex, usernameRegex } from "../constants";
+import { emailRegex, imageUrlRegex, phoneNumberRegex, usernameRegex } from "../constants";
 
 export const emailValidators = [
   Validators.required,
@@ -32,4 +32,26 @@ export const phoneNumberValidators = [
 
 export const commentTextValidators = [
   Validators.required
+]
+
+export const titleValidators = [
+  Validators.required,
+  Validators.minLength(5),
+  Validators.maxLength(150),
+]
+
+export const summaryValidators = [
+  Validators.required,
+  Validators.minLength(3),
+  Validators.maxLength(100),
+]
+
+export const descriptionValidators = [
+  Validators.required,
+  Validators.minLength(5),
+  Validators.maxLength(100_000),
+]
+
+export const imageUrlValidators = [
+  Validators.pattern(imageUrlRegex)
 ]

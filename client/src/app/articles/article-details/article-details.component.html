@@ -2,7 +2,8 @@
   <app-spinner></app-spinner>
 </div>
 <div class="content-container" *ngIf="!(isLoading$ | async)">
-  <div class="article-img" [style]="'background-image: url(' + (article$ | async)?.imageUrl + ');'"></div>
+  <div class="article-img"
+    [style]="'background-image: url(' + ((article$ | async)?.imageUrl || defaultImageUrl) + ');'"></div>
 
   <div class="article-content">
     <div class="actions" *ngIf="isOwner">

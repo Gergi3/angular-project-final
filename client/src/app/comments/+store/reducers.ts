@@ -18,13 +18,11 @@ export const commentListReducer = createReducer<ICommentListState>(
   on(commentListActions.loadCommentsClear, () => ({ ...initialcommentListState })),
 
   on(commentListActions.createCommentSuccess, (state, { comment }) => {
-    if (state.commentList === null) { return { ...state } }
-
-    let newState = { ...state, commentList: [comment] };
-    if (state.commentList) {
-      newState = { ...state, commentList: [comment, ...state.commentList] }
+    if (state.commentList === null) {
+      return { ...state, commentList: [comment] }
     }
-    return newState;
+
+    return { ...state, commentList: [comment, ...state.commentList] };
   }),
 
   on(commentListActions.editCommentSuccess, (state, { comment }) => {

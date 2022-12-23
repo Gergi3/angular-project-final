@@ -25,6 +25,30 @@ export class ArticleModuleEffects {
     ))
   ));
 
+  createArticle$ = createEffect(() => this.actions$.pipe(
+    ofType(articleListActions.createArticle),
+    switchMap((args) => this.articleService.create(args).pipe(
+      map(article => articleListActions.createArticleSuccess({ article })),
+      catchError(error => [articleListActions.createArticleFailure({ error })])
+    ))
+  ));
+
+  editArticle$ = createEffect(() => this.actions$.pipe(
+    ofType(articleListActions.editArticle),
+    switchMap((args) => this.articleService.edit(args).pipe(
+      map(article => articleListActions.editArticleSuccess({ article })),
+      catchError(error => [articleListActions.editArticleFailure({ error })])
+    ))
+  ));
+
+  deleteArticle$ = createEffect(() => this.actions$.pipe(
+    ofType(articleListActions.deleteArticle),
+    switchMap(({ articleId }) => this.articleService.delete(articleId).pipe(
+      map(article => articleListActions.deleteArticleSuccess({ article })),
+      catchError(error => [articleListActions.deleteArticleFailure({ error })])
+    ))
+  ));
+
   constructor(
     private actions$: Actions,
     private articleService: ArticleService

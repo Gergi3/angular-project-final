@@ -16,6 +16,21 @@ export interface ILoadArticlesArgs {
   profile: boolean
 }
 
+export interface ICreateArticlesArgs {
+  title: string
+  summary: string
+  description: string
+  imageUrl: string | null
+}
+
+export interface IEditArticlesArgs {
+  articleId: string,
+  title: string
+  summary: string
+  description: string
+  imageUrl: string | null
+}
+
 export const defaultLoadArticlesArgs = {
   profile: false
 }

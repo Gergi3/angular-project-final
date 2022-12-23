@@ -1,1 +1,45 @@
-{{isCreate ? 'CREATE' : (isEdit ? 'EDIT' : 'DELETE')}}
+<div class="spinner-container" *ngIf="isDoingAction$ | async">
+  <app-spinner></app-spinner>
+</div>
+<form class="form" [formGroup]="form" (ngSubmit)="submitHandler()" *ngIf="!(isDoingAction$ | async)">
+  <h2 class="form-title">{{text}} Article</h2>
+  <div class="hint">* required fields</div>
+  <div class="action-failure" *ngIf="actionFailure">{{actionFailure}}</div>
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input type="text" matInput placeholder="My Title" formControlName="title" />
+    <mat-error *ngIf="form.get('title')?.hasError('required')">Title is required</mat-error>
+    <mat-error *ngIf="form.get('title')?.hasError('minlength') || form.get('title')?.hasError('maxlength')">
+      Title should be between 5 and 150 characters
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Summary</mat-label>
+    <input type="text" matInput placeholder="My pretty summary.." formControlName="summary" />
+    <mat-error *ngIf="form.get('summary')?.hasError('required')">Summary is required</mat-error>
+    <mat-error *ngIf="form.get('summary')?.hasError('minlength') || form.get('summary')?.hasError('maxlength')">
+      Summary should be between 3 and 100 characters
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea rows="5" matInput placeholder="My very very long description.." formControlName="description"></textarea>
+    <mat-error *ngIf="form.get('description')?.hasError('required')">Description is required</mat-error>
+    <mat-error *ngIf="form.get('description')?.hasError('minlength') || form.get('description')?.hasError('maxlength')">
+      Description should be between 5 and 100 000 characters
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Image URL</mat-label>
+    <input type="text" matInput placeholder="Here goeas a link/address of an image" formControlName="imageUrl" />
+    <mat-error *ngIf="form.get('imageUrl')?.hasError('pattern')">Image URL must be a valid link</mat-error>
+  </mat-form-field>
+
+  <div class="submit-btns">
+    <button mat-flat-button type="button" (click)="cancelHandler()">Cancel</button>
+    <button mat-flat-button color="primary">{{text}}</button>
+  </div>
+</form>
