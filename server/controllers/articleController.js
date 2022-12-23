@@ -75,7 +75,7 @@ function deleteArticle(req, res, next) {
       return Promise.all([
         deleted,
         userModel.updateOne({ _id: userId }, { $pull: { articles: deleted?._id } }),
-        commentModel.remove({ article: articleId })
+        commentModel.deleteOne({ article: articleId })
       ])
     })
     .then(([deleted, userResult, commentResult]) => {
