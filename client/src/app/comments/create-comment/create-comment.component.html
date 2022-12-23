@@ -2,7 +2,7 @@
   <mat-form-field class="example-full-width">
     <mat-label>{{(isLoggedIn$ | async) ? 'Leave a comment' : 'You need to login to comment'}}</mat-label>
     <textarea
-      [errorStateMatcher]="textErrorStateMatcher"
+      [errorStateMatcher]="commentTextStateMatcher"
       matInput 
       placeholder="It makes me feel..." [rows]="4"
       formControlName="text">

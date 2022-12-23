@@ -1,14 +1,48 @@
 <mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-subtitle>Comment</mat-card-subtitle>
-    <mat-card-title>{{comment.user.username}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <p [innerHTML]="comment.text"></p>
-    <mat-divider></mat-divider>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>EDIT</button>
-    <button mat-button>DELETE</button>
-  </mat-card-actions>
+  <app-spinner *ngIf="
+    ((isEditing$ | async) && isEdit)
+    || ((isDeleting$ | async) && isDelete)">
+  </app-spinner>
+  <form [formGroup]="editForm" (ngSubmit)="editHandler()" *ngIf="
+    (!(isEditing$ | async) || ((isEditing$ | async) && !isEdit))
+    && (!(isDeleting$ | async) || ((isDeleting$ | async) && !isDelete))">
+
+    <mat-card-header>
+      <mat-card-subtitle>{{commentSubtitle}}</mat-card-subtitle>
+      <mat-card-title>{{comment.user.username}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p [innerHTML]="comment.text" *ngIf="!isEdit"></p>
+      <div class="action-failure" *ngIf="actionFailure">{{actionFailure}}</div>
+      
+      <mat-form-field class="edit-form-field" *ngIf="isEdit" appearance="fill">
+        <mat-label>Edit your comment..</mat-label>
+        <textarea matInput [rows]="1" formControlName="text"></textarea>
+        <mat-error *ngIf="editForm.get('text')?.hasError('required')">A message is required to comment.</mat-error>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+
+    <mat-card-actions *ngIf="(isLoggedIn$ | async) && isOwner">
+      <ng-container *ngIf="isDefault; then defaultButtons; else isDelete ? deleteButtons : editButtons;"></ng-container>
+      <ng-template #defaultButtons>
+        <button mat-stroked-button (click)="enableEdit()">EDIT</button>
+        <button mat-stroked-button (click)="enableDelete()">DELETE</button>
+      </ng-template>
+
+      <ng-template #deleteButtons>
+        <p *ngIf="deleteConfirmed" class="confirmation-text">Are you REALLY sure?</p>
+        <button mat-flat-button color="warn"
+          (click)="deleteConfirmed ? deleteHandler() : confirmDelete()">DELETE</button>
+        <button mat-stroked-button (click)="enableDefault()">CANCEL</button>
+      </ng-template>
+
+      <ng-template #editButtons>
+        <button mat-flat-button color="primary" (click)="editHandler()"
+          [disabled]="editForm.invalid && editForm.touched">CONFIRM</button>
+        <button mat-stroked-button (click)="enableDefault()">CANCEL</button>
+      </ng-template>
+    </mat-card-actions>
+  </form>
 </mat-card>

@@ -39,7 +39,7 @@ function createCommentByArticleId(req, res, next) {
     .then(([comment, userResult, articleResult]) => {
       if (comment && userResult.ok === 1 && articleResult.ok === 1) {
         commentModel.findOne({ _id: comment._id }, { __v: 0 })
-          .populate('user', '-pasword -__v')
+          .populate('user', '-password -__v')
           .then(commentPopulated => res.status(200).json(commentPopulated))
           .catch(err => res.status(401).json({ message: 'Not allowed' }))
       } else {
@@ -50,16 +50,18 @@ function createCommentByArticleId(req, res, next) {
 }
 
 function editCommentByArticleId(req, res, next) {
-  const { articleId, commentId } = req.params;
+  const { commentId } = req.params;
   const { text } = req.body;
   const { _id: userId } = req.user;
 
   commentModel.findOneAndUpdate(
     { _id: commentId, user: userId },
-    { text, user: userId, article: articleId },
+    { text, user: userId },
     { new: true, runValidators: true })
+    .populate('user', '-password -__v')
     .then(comment => {
       if (comment) {
+        console.log(comment);
         res.status(200).json(comment);
       } else {
         res.status(401).json({ message: 'Not allowed' })
@@ -69,7 +71,7 @@ function editCommentByArticleId(req, res, next) {
 }
 
 function deleteCommentByArticleId(req, res, next) {
-  const { articleId, commentId } = req.params;
+  const { commentId } = req.params;
   const { _id: userId } = req.user;
 
   commentModel.findOneAndDelete({ _id: commentId, user: userId })
@@ -77,7 +79,7 @@ function deleteCommentByArticleId(req, res, next) {
       return Promise.all([
         comment,
         userModel.updateOne({ _id: userId }, { $pull: { comments: comment?._id } }),
-        articleModel.updateOne({ _id: articleId }, { $pull: { comments: comment?._id } })
+        articleModel.updateOne({ _id: comment?.article  }, { $pull: { comments: comment?._id } })
       ])
     })
     .then(([comment, userResult, articleResult]) => {

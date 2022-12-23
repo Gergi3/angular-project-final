@@ -15,6 +15,9 @@ import { HomeComponent } from './components/home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthenticateComponent } from './components/authenticate/authenticate.component';
+import { ApiCheckComponent } from './components/api-check/api-check.component';
+import { ServerMaintenanceComponent } from './components/server-maintenance/server-maintenance.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { AuthenticateComponent } from './components/authenticate/authenticate.co
     FooterComponent,
     HomeComponent,
     NotFoundComponent,
-    AuthenticateComponent
+    AuthenticateComponent,
+    ApiCheckComponent,
+    ServerMaintenanceComponent
   ],
   imports: [
     CommonModule,
@@ -35,11 +40,14 @@ import { AuthenticateComponent } from './components/authenticate/authenticate.co
     MatListModule,
     MatButtonModule,
     MatIconModule,
+    MatSidenavModule
   ],
   exports: [
     NavigationComponent,
     FooterComponent,
-    AuthenticateComponent
+    AuthenticateComponent,
+    ApiCheckComponent,
+    ServerMaintenanceComponent,
   ],
   providers: [apiInterceptorProvider],
 })

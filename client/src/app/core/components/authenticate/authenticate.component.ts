@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/auth/+store/models';
 
 @Component({
-  selector: 'app-authenticate',
+  selector: 'authenticate',
   templateUrl: './authenticate.component.html',
   styleUrls: ['./authenticate.component.scss']
 })
 export class AuthenticateComponent implements OnInit {
-
-  
   constructor(
     public userModel: UserModel
   ) { }

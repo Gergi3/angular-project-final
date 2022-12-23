@@ -17,6 +17,8 @@ import { CommentCardComponent } from './comment-card/comment-card.component';
 import { CreateCommentComponent } from './create-comment/create-comment.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,10 @@ import { SharedModule } from '../shared/shared.module';
     // Material
     MatCardModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
   exports: [
     CommentsSectionComponent

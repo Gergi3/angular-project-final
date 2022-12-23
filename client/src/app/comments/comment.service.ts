@@ -18,4 +18,12 @@ export class CommentService {
   createComment(articleId: string, text: string) {
     return this.http.post<IComment>('/api/articles/' + articleId + '/comments', { text });
   }
+
+  editComment(commentId: string, text: string) {
+    return this.http.put<IComment>('/api/comments/' + commentId, { text });
+  }
+
+  deleteComment(commentId: string) {
+    return this.http.delete<IComment>('/api/comments/' + commentId);
+  }
 }

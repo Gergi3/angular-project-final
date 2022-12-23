@@ -23,15 +23,37 @@ export class CommentModel {
     this.loadCommentsFailure$.pipe(map(() => false))
   ).pipe(shareReplay(1)); // shareReplay - if someone subscribes later on (for some reason) he gets the last value
 
-  createComments$ = this.actions$.pipe(ofType(commentListActions.createComment));
-  createCommentsSuccess$ = this.actions$.pipe(ofType(commentListActions.createCommentSuccess));
-  createCommentsFailure$ = this.actions$.pipe(ofType(commentListActions.createCommentFailure));
+  createComment$ = this.actions$.pipe(ofType(commentListActions.createComment));
+  createCommentSuccess$ = this.actions$.pipe(ofType(commentListActions.createCommentSuccess));
+  createCommentFailure$ = this.actions$.pipe(ofType(commentListActions.createCommentFailure));
 
   isCreating$ = merge(
     [false],
-    this.createComments$.pipe(map(() => true)),
-    this.createCommentsSuccess$.pipe(map(() => false)),
-    this.createCommentsFailure$.pipe(map(() => false))
+    this.createComment$.pipe(map(() => true)),
+    this.createCommentSuccess$.pipe(map(() => false)),
+    this.createCommentFailure$.pipe(map(() => false))
+  ).pipe(shareReplay(1));
+
+  editComment$ = this.actions$.pipe(ofType(commentListActions.editComment));
+  editCommentSuccess$ = this.actions$.pipe(ofType(commentListActions.editCommentSuccess));
+  editCommentFailure$ = this.actions$.pipe(ofType(commentListActions.editCommentFailure));
+
+  isEditing$ = merge(
+    [false],
+    this.editComment$.pipe(map(() => true)),
+    this.editCommentSuccess$.pipe(map(() => false)),
+    this.editCommentFailure$.pipe(map(() => false))
+  ).pipe(shareReplay(1));
+
+  deleteComment$ = this.actions$.pipe(ofType(commentListActions.deleteComment));
+  deleteCommentSuccess$ = this.actions$.pipe(ofType(commentListActions.deleteCommentSuccess));
+  deleteCommentFailure$ = this.actions$.pipe(ofType(commentListActions.deleteCommentFailure));
+
+  isDeleting$ = merge(
+    [false],
+    this.deleteComment$.pipe(map(() => true)),
+    this.deleteCommentSuccess$.pipe(map(() => false)),
+    this.deleteCommentFailure$.pipe(map(() => false))
   ).pipe(shareReplay(1));
 
   constructor(
@@ -53,6 +75,14 @@ export class CommentModel {
 
   createComment(articleId: string, text: string) {
     this.store.dispatch(commentListActions.createComment({ articleId, text }));
+  }
+
+  editComment(commentId: string, text: string) {
+    this.store.dispatch(commentListActions.editComment({ commentId, text }))
+  }
+
+  deleteComment(commentId: string) {
+    this.store.dispatch(commentListActions.deleteComment({ commentId }))
   }
 
   handleDestroy() {

@@ -2,7 +2,7 @@
   <mat-card-header class="card-header">
     <div mat-card-avatar class="card-author-avatar"></div>
     <mat-card-title class="card-title">{{article.title}}</mat-card-title>
-    <mat-card-subtitle class="card-author">Author/User</mat-card-subtitle>
+    <mat-card-subtitle class="card-author">{{article.user.username}}</mat-card-subtitle>
   </mat-card-header>
   <a [routerLink]="'/articles/' + article._id">
     <div class="card-image" [style]="cardImageStyle" alt="Photo of a Shiba Inu"></div>

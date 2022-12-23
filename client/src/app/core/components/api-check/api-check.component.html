@@ -1,0 +1,13 @@
+<div class="wrapper" *ngIf="!apiIsUp">
+
+
+  <mat-sidenav-container>
+    <div class="spinner-container">
+      <app-spinner *ngIf="apiIsUp === null"></app-spinner>
+    </div>
+    <app-server-maintenance *ngIf="apiIsUp === false"></app-server-maintenance>
+  </mat-sidenav-container>
+
+</div>
+
+<ng-content *ngIf="apiIsUp"></ng-content>

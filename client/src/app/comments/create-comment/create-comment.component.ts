@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CommentModel } from '../+store/models';
-import { CreateCommentTextErrorStateMatcher } from './create-comment-text-error-state-matcher';
+import { CommentTextStateMatcher } from '../../core/state-matchers/comment-text.state-matcher';
 import { Subscription, first } from 'rxjs';
 import { UserModel } from 'src/app/auth/+store/models';
 
-const textErrorStateMatcher = new CreateCommentTextErrorStateMatcher();
 
 @Component({
   selector: 'app-create-comment',
@@ -16,11 +15,11 @@ export class CreateCommentComponent implements OnInit {
 
   private subscriptions: Subscription[] = [];
 
+  @Input() articleId!: string;
+
   isCreatingComment$ = this.commentModel.isCreating$;
   isLoggedIn$ = this.userModel.isLoggedIn$;
-  @Input() articleId!: string;
-  textErrorStateMatcher = textErrorStateMatcher;
-
+  
   commentForm = this.fb.group({
     text: ['', [Validators.required]]
   });
@@ -28,7 +27,8 @@ export class CreateCommentComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private commentModel: CommentModel,
-    private userModel: UserModel
+    private userModel: UserModel,
+    public commentTextStateMatcher: CommentTextStateMatcher
   ) { }
 
   ngOnInit() {

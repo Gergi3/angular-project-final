@@ -6,6 +6,7 @@ import { UserModel } from '../+store/models';
 import { IUserLoginInfo, IUserRegisterInfo } from 'src/app/core/interfaces/user';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, filter, first, switchMap, tap } from 'rxjs';
+import { ErrorHelper } from 'src/app/core/helpers/error.helper';
 
 @Component({
   selector: 'app-register',
@@ -36,7 +37,8 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private userModel: UserModel,
-    private router: Router
+    private router: Router,
+    private errorHelper: ErrorHelper
   ) { }
 
   registerHandler() {
@@ -60,7 +62,7 @@ export class RegisterComponent {
       .subscribe(() => this.router.navigate(['/']));
 
     this.userModel.registerUserFailure$.pipe(first())
-      .subscribe(({ error }) => this.registerFailure$$.next(error?.error?.message || error?.message));
+      .subscribe(({ error }) => this.registerFailure$$.next(this.errorHelper.getApiError(error)));
   }
 
   cancelHandler() {

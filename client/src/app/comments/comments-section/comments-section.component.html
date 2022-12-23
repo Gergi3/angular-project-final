@@ -1,8 +1,8 @@
 <app-create-comment [articleId]="articleId"></app-create-comment>
 
-<ul class="comment-cards-list" role="list">
-  <app-spinner *ngIf="commentsAreLoading$ | async"></app-spinner>
+<app-spinner *ngIf="commentsAreLoading$ | async"></app-spinner>
 
+<ul class="comment-cards-list" role="list" *ngIf="!(commentsAreLoading$ | async)">
   <li *ngFor="let comment of comments$ | async" class="comment-cards-list-item">
     <app-comment-card [comment]="comment"></app-comment-card>
   </li>

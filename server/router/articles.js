@@ -13,7 +13,5 @@ router.delete('/:articleId', auth(), articleController.deleteArticle);
 
 router.get('/:articleId/comments', commentController.getCommentsByArticleId);
 router.post('/:articleId/comments', auth(), commentController.createCommentByArticleId);
-router.put('/:articleId/comments/:commentId', auth(), commentController.editCommentByArticleId);
-router.delete('/:articleId/comments/:commentId', auth(), commentController.deleteCommentByArticleId);
 
 module.exports = router

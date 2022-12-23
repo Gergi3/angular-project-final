@@ -1,17 +1,19 @@
-<app-authenticate>
-  <div class="main-wrapper">
-    <header>
-      <app-navigation></app-navigation>
-    </header>
-
-    <mat-sidenav-container>
-      <div class="main-content">
-        <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-container>
-
-    <footer>
-      <app-footer></app-footer>
-    </footer>
-  </div>
-</app-authenticate>
+<api-check>
+  <authenticate>
+    <div class="main-wrapper">
+      <header>
+        <app-navigation></app-navigation>
+      </header>
+  
+      <mat-sidenav-container>
+        <div class="main-content">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-container>
+  
+      <footer>
+        <app-footer></app-footer>
+      </footer>
+    </div>
+  </authenticate>
+</api-check>

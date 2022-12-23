@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { IUserLoginInfo } from 'src/app/core/interfaces/user';
 import { BehaviorSubject, first } from 'rxjs';
 import { emailValidators, passwordValidators } from 'src/app/core/validators/reactive-validators';
+import { ErrorHelper } from 'src/app/core/helpers/error.helper';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private userModel: UserModel,
-    private router: Router
+    private router: Router,
+    private errorHelper: ErrorHelper
   ) { }
 
   loginHandler() {
@@ -45,7 +47,7 @@ export class LoginComponent {
       .subscribe(() => this.router.navigate(['/']));
 
     this.userModel.loginUserFailure$.pipe(first())
-      .subscribe(({ error }) => this.loginFailure$$.next(error?.error?.message || error?.message));
+      .subscribe(({ error }) => this.loginFailure$$.next(this.errorHelper.getApiError(error)));
   }
 
   cancelHandler() {
