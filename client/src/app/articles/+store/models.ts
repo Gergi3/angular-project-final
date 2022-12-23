@@ -3,10 +3,11 @@ import { Injectable } from "@angular/core";
 import { Actions, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
-import { filter, first, map, merge, shareReplay } from "rxjs";
+import { Observable, filter, first, forkJoin, map, merge, shareReplay, take } from "rxjs";
 import { articleDetailsActions, articleListActions } from "./actions";
 import { articleDetailsSelectors, articleListSelectors } from "./selectors";
 import { ILoadArticlesArgs, defaultLoadArticlesArgs } from "src/app/core/interfaces/article";
+import { UserModel } from "src/app/auth/+store/models";
 
 
 @Injectable({
@@ -28,7 +29,8 @@ export class ArticleListModel {
 
   constructor(
     private store: Store,
-    private actions$: Actions
+    private actions$: Actions,
+    private userModel: UserModel
   ) { }
 
   loadArticles(args: ILoadArticlesArgs = defaultLoadArticlesArgs) {
@@ -42,6 +44,24 @@ export class ArticleListModel {
   loadArticlesCancel() {
     this.store.dispatch(articleListActions.loadArticlesCancel());
   }
+
+  // TODO: Figure out
+  // getIsOwner(id: string) {
+    
+  //   return forkJoin({
+  //     user: this.userModel.user$,
+  //     article: this.articles$.pipe(
+  //       map(articles => articles?.find(x => x._id === id) || null),
+  //       map(article => console.log(article); return article;),
+  //       take(1)
+  //     )
+  //   }).pipe(map(({ user, article }) => {
+  //     let a = !!(user && article && user._id === article.user._id)
+  //     console.log(a);
+      
+  //     return a;
+  //   }))
+  // }
 
   handleDestroy() {
     this.isLoading$.pipe(first(), filter(isLoading => !!isLoading))
@@ -67,9 +87,15 @@ export class ArticleDetailsModel {
     this.loadArticleFailure$.pipe(map(() => false))
   ).pipe(shareReplay(1));
 
+  isOwner$ = forkJoin({
+    user: this.userModel.user$,
+    article: this.article$
+  }).pipe(map(({ user, article }) => !!(user && article && user._id === article.user._id)))
+
   constructor(
     private store: Store,
-    private actions$: Actions
+    private actions$: Actions,
+    private userModel: UserModel
   ) { }
 
   loadArticle(id: string) {

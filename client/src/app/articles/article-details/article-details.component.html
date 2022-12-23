@@ -3,7 +3,12 @@
 </div>
 <div class="content-container" *ngIf="!(isLoading$ | async)">
   <div class="article-img" [style]="'background-image: url(' + (article$ | async)?.imageUrl + ');'"></div>
+
   <div class="article-content">
+    <div class="actions" *ngIf="isOwner">
+      <a [routerLink]="'/articles/edit/' + (article$ | async)?._id"><button mat-button>EDIT</button></a>
+      <a [routerLink]="'/articles/delete/' + (article$ | async)?._id"><button mat-button>DELETE</button></a>
+    </div>
     <h1 class="article-title">{{(article$ | async)?.title}}</h1>
     <div class="article-summary">{{(article$ | async)?.summary}}</div>
     <div class="article-description">{{(article$ | async)?.description}}</div>

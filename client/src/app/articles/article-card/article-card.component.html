@@ -8,8 +8,8 @@
     <div class="card-image" [style]="cardImageStyle" alt="Photo of a Shiba Inu"></div>
     <mat-card-content class="card-content">{{article.summary}}</mat-card-content>
   </a>
-  <mat-card-actions class="card-actions">
-    <button mat-button>EDIT</button>
-    <button mat-button>DELETE</button>
+  <mat-card-actions class="card-actions" *ngIf="isOwner">
+    <a [routerLink]="'/articles/edit/' + article._id"><button mat-button>EDIT</button></a>
+    <a [routerLink]="'/articles/delete/' + article._id"><button mat-button>DELETE</button></a>
   </mat-card-actions>
 </mat-card>

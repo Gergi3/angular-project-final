@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ArticleDetailsModel } from '../+store/models';
 import { first } from 'rxjs';
+import { UserModel } from 'src/app/auth/+store/models';
 
 @Component({
   selector: 'app-article-details',
@@ -14,10 +15,13 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
   article$ = this.articleDetailsModel.article$;
   isLoading$ = this.articleDetailsModel.isLoading$;
 
+  isOwner: boolean = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private articleDetailsModel: ArticleDetailsModel,
-    private router: Router
+    private router: Router,
+    private userModel: UserModel
   ) { }
 
   ngOnInit() {
@@ -25,6 +29,14 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     this.articleDetailsModel.loadArticle(id);
     this.articleDetailsModel.loadArticleFailure$.pipe(first())
       .subscribe(() => this.router.navigateByUrl('/404', { skipLocationChange: true }));
+
+    // TODO: FIX CALLBACK HELL
+    this.articleDetailsModel.loadArticleSuccess$.pipe(first())
+      .subscribe(({ article }) => {
+        this.userModel.user$.pipe(first()).subscribe(user => {
+          this.isOwner = user?._id === article.user._id;
+        });
+      })
   }
 
   ngOnDestroy() {
