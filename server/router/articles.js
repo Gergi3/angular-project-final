@@ -3,11 +3,10 @@ const router = express.Router();
 const { auth } = require('../utils');
 const { articleController, commentController } = require('../controllers');
 
-// middleware that is specific to this router
-
 router.get('/', articleController.getArticles);
-router.get('/:articleId', articleController.getArticle);
 router.post('/', auth(), articleController.createArticle);
+router.get('/profile', auth(), articleController.getCurrentUserArticles);
+router.get('/:articleId', articleController.getArticle);
 router.put('/:articleId', auth(), articleController.editArticle);
 router.delete('/:articleId', auth(), articleController.deleteArticle);
 

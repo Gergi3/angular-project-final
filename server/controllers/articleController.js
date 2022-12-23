@@ -1,9 +1,9 @@
 const { articleModel, userModel, commentModel } = require('../models');
 
 function getArticles(req, res, next) {
-  articleModel.find({}, { comments: 0, description: 0, __v: 0 })
+  articleModel.find({}, { __v: 0 })
     .populate('user', '-password -__v')
-    .then(articles => res.json(articles))
+    .then(articles => res.status(200).json(articles))
     .catch(next);
 }
 
@@ -12,9 +12,19 @@ function getArticle(req, res, next) {
 
   articleModel.findById(articleId, { __v: 0 })
     .populate('user', '-password -__v')
-    .then(article => res.json(article))
+    .then(article => res.status(200).json(article))
     .catch(next);
 }
+
+function getCurrentUserArticles(req, res, next) {
+  const { _id: userId } = req.user;
+
+  articleModel.find({ user: userId }, { __v: 0 })
+    .populate('user', '-password -__v')
+    .then(articles => res.status(200).json(articles))
+    .catch(next);
+}
+
 
 function createArticle(req, res, next) {
   const { title, summary, description, imageUrl } = req.body;
@@ -83,5 +93,6 @@ module.exports = {
   createArticle,
   getArticle,
   editArticle,
-  deleteArticle
+  deleteArticle,
+  getCurrentUserArticles
 }
