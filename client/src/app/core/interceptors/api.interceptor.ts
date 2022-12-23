@@ -1,11 +1,12 @@
-import { Injectable, Provider } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
+  HTTP_INTERCEPTORS,
   HttpEvent,
+  HttpHandler,
   HttpInterceptor,
-  HTTP_INTERCEPTORS
+  HttpRequest
 } from '@angular/common/http';
+import { Injectable, Provider } from '@angular/core';
+
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

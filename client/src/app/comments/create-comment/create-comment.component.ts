@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CommentModel } from '../+store/models';
-import { CommentTextStateMatcher } from '../../core/state-matchers/comment-text.state-matcher';
+
 import { Subscription, first } from 'rxjs';
 import { UserModel } from 'src/app/auth/+store/models';
+import { CommentModel } from '../+store/models';
+import { CommentTextStateMatcher } from '../../core/state-matchers/comment-text.state-matcher';
 
 
 @Component({

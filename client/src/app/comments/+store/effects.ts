@@ -1,8 +1,10 @@
+import { Injectable } from "@angular/core";
+
 import { Actions, createEffect, ofType } from "@ngrx/effects";
+
+import { catchError, map, switchMap, takeUntil } from "rxjs";
 import { CommentService } from "../comment.service";
 import { commentListActions } from "./actions";
-import { takeUntil, map, switchMap, catchError, mergeMap } from "rxjs";
-import { Injectable } from "@angular/core";
 
 @Injectable()
 export class CommentModuleEffects {

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { UserModel } from '../+store/models';
 import { Router } from '@angular/router';
-import { IUserLoginInfo } from 'src/app/core/interfaces/user';
+
 import { first } from 'rxjs';
-import { emailValidators, passwordValidators } from 'src/app/core/validators/reactive-validators';
 import { ErrorHelper } from 'src/app/core/helpers/error.helper';
+import { IUserLoginInfo } from 'src/app/core/interfaces/user';
+import { emailValidators, passwordValidators } from 'src/app/core/validators/reactive-validators';
+import { UserModel } from '../+store/models';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class LoginComponent {
 
   loginHandler() {
     if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
       return;
     }
 
@@ -40,7 +42,7 @@ export class LoginComponent {
     const userInfo: IUserLoginInfo = {
       email: email!,
       password: password!
-    }
+    };
     this.userModel.loginUser(userInfo);
 
     this.userModel.loginUserSuccess$.pipe(first())

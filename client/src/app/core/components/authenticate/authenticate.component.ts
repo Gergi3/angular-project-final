@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { UserModel } from 'src/app/auth/+store/models';
 
 @Component({
@@ -7,6 +8,7 @@ import { UserModel } from 'src/app/auth/+store/models';
   styleUrls: ['./authenticate.component.scss']
 })
 export class AuthenticateComponent implements OnInit {
+  
   constructor(
     public userModel: UserModel
   ) { }

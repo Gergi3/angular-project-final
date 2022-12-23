@@ -6,5 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./page-title.component.scss']
 })
 export class PageTitleComponent {
+  
   @Input() text!: string;
 }

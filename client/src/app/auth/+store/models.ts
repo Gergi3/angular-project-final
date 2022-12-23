@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { userSelectors } from "./selectors";
-import { userActions } from "./actions";
+
 import { Actions, ofType } from "@ngrx/effects";
-import { filter, first, map, merge, shareReplay, switchMap, of } from "rxjs";
+import { Store } from "@ngrx/store";
+
+import { filter, first, map, merge, of, shareReplay, switchMap } from "rxjs";
 import { IUserLoginInfo, IUserRegisterInfo } from "src/app/core/interfaces/user";
+import { userActions } from "./actions";
+import { userSelectors } from "./selectors";
 
 
 @Injectable({

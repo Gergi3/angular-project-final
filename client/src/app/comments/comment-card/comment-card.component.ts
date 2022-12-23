@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+
 import { Observable, first } from 'rxjs';
 import { UserModel } from 'src/app/auth/+store/models';
+import { ErrorHelper } from 'src/app/core/helpers/error.helper';
 import { IComment } from 'src/app/core/interfaces/comment';
 import { CommentModel } from '../+store/models';
-import { ErrorHelper } from 'src/app/core/helpers/error.helper';
 
 @Component({
   selector: 'app-comment-card',
@@ -12,6 +13,7 @@ import { ErrorHelper } from 'src/app/core/helpers/error.helper';
   styleUrls: ['./comment-card.component.scss']
 })
 export class CommentCardComponent implements OnInit {
+  
   @Input() comment!: IComment;
 
   isLoggedIn$ = this.userModel.isLoggedIn$;
@@ -34,7 +36,7 @@ export class CommentCardComponent implements OnInit {
   get commentSubtitle(): string {
     return this.isDefault
       ? 'Comment'
-      : this.isDelete ? 'Delete Comment' : 'Edit Comment'
+      : this.isDelete ? 'Delete Comment' : 'Edit Comment';
   }
 
   constructor(
@@ -42,8 +44,7 @@ export class CommentCardComponent implements OnInit {
     private commentModel: CommentModel,
     private fb: FormBuilder,
     private errorHelper: ErrorHelper
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.userModel.user$.pipe(first()).subscribe(user => {
@@ -71,7 +72,7 @@ export class CommentCardComponent implements OnInit {
   // Handlers
   deleteHandler() {
     this.commentModel.deleteComment(this.comment._id);
-    this.handleActionStream(this.commentModel.deleteCommentSuccess$, this.commentModel.deleteCommentFailure$)
+    this.handleActionStream(this.commentModel.deleteCommentSuccess$, this.commentModel.deleteCommentFailure$);
   }
 
   editHandler() {
@@ -83,7 +84,7 @@ export class CommentCardComponent implements OnInit {
     const text = this.editForm.get('text')?.value!;
 
     this.commentModel.editComment(this.comment._id, text);
-    this.handleActionStream(this.commentModel.editCommentSuccess$, this.commentModel.editCommentFailure$)
+    this.handleActionStream(this.commentModel.editCommentSuccess$, this.commentModel.editCommentFailure$);
   }
 
   private handleActionStream(success$: Observable<{ comment: IComment }>, failure$: Observable<{ error: any }>) {

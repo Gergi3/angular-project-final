@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { commentListSelectors } from "./selectors";
-import { commentListActions } from "./actions";
+
 import { Actions, ofType } from "@ngrx/effects";
+import { Store } from "@ngrx/store";
+
 import { filter, first, map, merge, shareReplay } from "rxjs";
+import { commentListActions } from "./actions";
+import { commentListSelectors } from "./selectors";
 
 
 @Injectable({

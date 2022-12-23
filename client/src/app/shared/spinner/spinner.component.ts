@@ -7,6 +7,7 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
   styleUrls: ['./spinner.component.scss']
 })
 export class SpinnerComponent {
+
   @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
   @Input() mode: ProgressSpinnerMode = 'indeterminate';
   @Input() value = 50;

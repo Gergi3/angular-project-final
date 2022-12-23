@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { first } from 'rxjs';
+import { ErrorHelper } from 'src/app/core/helpers/error.helper';
+import { IUserRegisterInfo } from 'src/app/core/interfaces/user';
 import { confirmPasswordsValidator } from 'src/app/core/validators/confirm-passwords.validator';
 import { emailValidators, passwordValidators, phoneNumberValidators, rePasswordValidators, usernameValidators } from 'src/app/core/validators/reactive-validators';
 import { UserModel } from '../+store/models';
-import { IUserRegisterInfo } from 'src/app/core/interfaces/user';
-import { Router } from '@angular/router';
-import { first } from 'rxjs';
-import { ErrorHelper } from 'src/app/core/helpers/error.helper';
 
 @Component({
   selector: 'app-register',
@@ -55,7 +56,7 @@ export class RegisterComponent {
       password: password!,
       phoneNumber: phoneNumber || null,
       isMale: isMale === null || isMale === '' || isMale === undefined ? null : !!isMale
-    }
+    };
     this.userModel.registerUser(userInfo);
 
     this.userModel.registerUserSuccess$.pipe(first())

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { UserModel } from 'src/app/auth/+store/models';
 
 @Component({
@@ -7,6 +8,7 @@ import { UserModel } from 'src/app/auth/+store/models';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
+
   isLoggedIn$ = this.userModel.isLoggedIn$;
 
   constructor(

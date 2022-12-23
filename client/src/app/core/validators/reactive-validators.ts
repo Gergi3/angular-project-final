@@ -1,4 +1,5 @@
 import { Validators } from "@angular/forms";
+
 import { emailRegex, phoneNumberRegex, usernameRegex } from "../constants";
 
 export const emailValidators = [

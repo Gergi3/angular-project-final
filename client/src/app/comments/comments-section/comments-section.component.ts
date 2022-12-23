@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { CommentModel } from '../+store/models';
 
 @Component({
@@ -7,6 +8,7 @@ import { CommentModel } from '../+store/models';
   styleUrls: ['./comments-section.component.scss']
 })
 export class CommentsSectionComponent implements OnInit {
+  
   @Input() articleId!: string;
 
   comments$ = this.commentModel.comments$;

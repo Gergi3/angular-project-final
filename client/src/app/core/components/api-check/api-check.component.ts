@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { catchError } from 'rxjs';
 
 @Component({
@@ -13,8 +13,7 @@ export class ApiCheckComponent {
   apiIsUp: boolean | null = null;
 
   constructor(
-    private http: HttpClient,
-    private router: Router,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {

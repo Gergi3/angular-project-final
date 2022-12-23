@@ -1,4 +1,5 @@
 import { ActionReducerMap, createReducer, on } from '@ngrx/store';
+
 import { IArticle } from '../../core/interfaces/article';
 import { articleDetailsActions, articleListActions } from './actions';
 

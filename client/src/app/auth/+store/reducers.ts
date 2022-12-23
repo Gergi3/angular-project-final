@@ -1,6 +1,7 @@
 import { ActionReducerMap, createReducer, on } from '@ngrx/store';
-import { userActions } from './actions';
+
 import { IUser } from 'src/app/core/interfaces/user';
+import { userActions } from './actions';
 
 // User State
 export interface IUserState {
