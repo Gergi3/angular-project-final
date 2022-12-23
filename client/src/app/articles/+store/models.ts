@@ -6,6 +6,7 @@ import { Store } from "@ngrx/store";
 import { filter, first, map, merge, shareReplay } from "rxjs";
 import { articleDetailsActions, articleListActions } from "./actions";
 import { articleDetailsSelectors, articleListSelectors } from "./selectors";
+import { ILoadArticlesArgs, defaultLoadArticlesArgs } from "src/app/core/interfaces/article";
 
 
 @Injectable({
@@ -30,8 +31,8 @@ export class ArticleListModel {
     private actions$: Actions
   ) { }
 
-  loadArticles() {
-    this.store.dispatch(articleListActions.loadArticles());
+  loadArticles(args: ILoadArticlesArgs = defaultLoadArticlesArgs) {
+    this.store.dispatch(articleListActions.loadArticles(args));
   }
 
   loadArticlesClear() {

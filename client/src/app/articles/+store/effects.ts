@@ -9,7 +9,7 @@ export class ArticleModuleEffects {
 
   loadArticles$ = createEffect(() => this.actions$.pipe(
     ofType(articleListActions.loadArticles),
-    switchMap(() => this.articleService.getAll().pipe(
+    switchMap((args) => this.articleService.getAll(args).pipe(
       takeUntil(this.actions$.pipe(ofType(articleListActions.loadArticlesCancel))),
       map(articles => articleListActions.loadArticlesSuccess({ articles })),
       catchError(error => [articleListActions.loadArticlesFailure({ error })])

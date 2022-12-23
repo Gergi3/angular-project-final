@@ -1,10 +1,10 @@
 import { createAction, props } from "@ngrx/store";
 
-import { IArticle } from "src/app/core/interfaces/article";
+import { IArticle, ILoadArticlesArgs } from "src/app/core/interfaces/article";
 
 const namespace = '[ARTICLES MODULE]'
 
-const loadArticles = createAction(`${namespace} Load Articles`);
+const loadArticles = createAction(`${namespace} Load Articles`, props<ILoadArticlesArgs>());
 const loadArticlesSuccess = createAction(`${namespace} Load Articles Success`, props<{ articles: IArticle[] }>());
 const loadArticlesFailure = createAction(`${namespace} Load Articles Failure`, props<{ error: any }>());
 const loadArticlesCancel = createAction(`${namespace} Load Articles Cancel`);

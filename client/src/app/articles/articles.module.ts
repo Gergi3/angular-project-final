@@ -13,9 +13,12 @@ import { SharedModule } from '../shared/shared.module';
 import { ArticleModuleEffects } from './+store/effects';
 import { articleModuleStoreName, articleReducers } from './+store/reducers';
 import { ArticleCardComponent } from './article-card/article-card.component';
+import { ArticleCudComponent } from './article-cud/article-cud.component';
 import { ArticleDetailsComponent } from './article-details/article-details.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticlesRoutingModule } from './articles-routing.module';
+import { MyArticlesComponent } from './my-articles/my-articles.component';
+import { AllArticlesComponent } from './all-articles/all-articles.component';
 
 
 
@@ -24,6 +27,9 @@ import { ArticlesRoutingModule } from './articles-routing.module';
     ArticleListComponent,
     ArticleCardComponent,
     ArticleDetailsComponent,
+    ArticleCudComponent,
+    MyArticlesComponent,
+    AllArticlesComponent,
   ],
   imports: [
     CommonModule,

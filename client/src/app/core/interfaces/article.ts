@@ -11,3 +11,11 @@ export interface IArticle {
   createdAt: string
   updatedAt: string
 }
+
+export interface ILoadArticlesArgs {
+  profile: boolean
+}
+
+export const defaultLoadArticlesArgs = {
+  profile: false
+}

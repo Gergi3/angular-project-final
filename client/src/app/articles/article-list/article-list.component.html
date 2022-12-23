@@ -1,4 +1,4 @@
-<app-page-title text="All Articles"></app-page-title>
+<app-page-title [text]="pageTitle"></app-page-title>
 
 <div class="content-container">
   <app-spinner class="spinner" *ngIf="isLoading$ | async"></app-spinner>

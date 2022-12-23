@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ArticleDetailsModel } from '../+store/models';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-article-details',
@@ -16,11 +17,14 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private articleDetailsModel: ArticleDetailsModel,
+    private router: Router
   ) { }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('articleId')!;
     this.articleDetailsModel.loadArticle(id);
+    this.articleDetailsModel.loadArticleFailure$.pipe(first())
+      .subscribe(() => this.router.navigateByUrl('/404', { skipLocationChange: true }));
   }
 
   ngOnDestroy() {
