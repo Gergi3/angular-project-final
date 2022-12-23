@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IArticle } from 'src/app/core/interfaces/article';
 
 @Component({

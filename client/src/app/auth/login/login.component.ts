@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { UserModel } from '../+store/models';
 import { Router } from '@angular/router';
 import { IUserLoginInfo } from 'src/app/core/interfaces/user';
-import { BehaviorSubject, first } from 'rxjs';
+import { first } from 'rxjs';
 import { emailValidators, passwordValidators } from 'src/app/core/validators/reactive-validators';
 import { ErrorHelper } from 'src/app/core/helpers/error.helper';
 
@@ -14,15 +14,15 @@ import { ErrorHelper } from 'src/app/core/helpers/error.helper';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  private loginFailure$$ = new BehaviorSubject<string | null>(null);
 
-  loginFailure$ = this.loginFailure$$.asObservable();
   isLoggingIn$ = this.userModel.isLoggingIn$;
 
   loginForm = this.fb.group({
     email: ['', emailValidators],
     password: ['', passwordValidators]
-  })
+  });
+
+  loginFailure: null | string = null;
 
   constructor(
     private fb: FormBuilder,
@@ -47,7 +47,7 @@ export class LoginComponent {
       .subscribe(() => this.router.navigate(['/']));
 
     this.userModel.loginUserFailure$.pipe(first())
-      .subscribe(({ error }) => this.loginFailure$$.next(this.errorHelper.getApiError(error)));
+      .subscribe(({ error }) => this.loginFailure = this.errorHelper.getApiError(error));
   }
 
   cancelHandler() {

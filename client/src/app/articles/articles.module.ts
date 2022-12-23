@@ -1,21 +1,21 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { MatCardModule } from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 
-import { ArticlesRoutingModule } from './articles-routing.module';
-import { SharedModule } from '../shared/shared.module';
-import { ArticleListComponent } from './article-list/article-list.component';
-import { ArticleCardComponent } from './article-card/article-card.component';
-import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
-import { ArticleModuleEffects } from './+store/effects';
 import { StoreModule } from '@ngrx/store';
-import { articleModuleStoreName, articleReducers } from './+store/reducers';
-import { ArticleDetailsComponent } from './article-details/article-details.component';
+
 import { CommentsModule } from '../comments/comments.module';
+import { SharedModule } from '../shared/shared.module';
+import { ArticleModuleEffects } from './+store/effects';
+import { articleModuleStoreName, articleReducers } from './+store/reducers';
+import { ArticleCardComponent } from './article-card/article-card.component';
+import { ArticleDetailsComponent } from './article-details/article-details.component';
+import { ArticleListComponent } from './article-list/article-list.component';
+import { ArticlesRoutingModule } from './articles-routing.module';
 
 
 

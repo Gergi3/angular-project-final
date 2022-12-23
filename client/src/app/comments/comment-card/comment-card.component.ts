@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable, first } from 'rxjs';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Observable, first } from 'rxjs';
 import { UserModel } from 'src/app/auth/+store/models';
 import { IComment } from 'src/app/core/interfaces/comment';
 import { CommentModel } from '../+store/models';

@@ -3,9 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { confirmPasswordsValidator } from 'src/app/core/validators/confirm-passwords.validator';
 import { emailValidators, passwordValidators, phoneNumberValidators, rePasswordValidators, usernameValidators } from 'src/app/core/validators/reactive-validators';
 import { UserModel } from '../+store/models';
-import { IUserLoginInfo, IUserRegisterInfo } from 'src/app/core/interfaces/user';
+import { IUserRegisterInfo } from 'src/app/core/interfaces/user';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, filter, first, switchMap, tap } from 'rxjs';
+import { first } from 'rxjs';
 import { ErrorHelper } from 'src/app/core/helpers/error.helper';
 
 @Component({
@@ -15,8 +15,6 @@ import { ErrorHelper } from 'src/app/core/helpers/error.helper';
 })
 export class RegisterComponent {
 
-  private registerFailure$$ = new BehaviorSubject<string | null>(null);
-  registerFailure$ = this.registerFailure$$.asObservable()
   isRegistering$ = this.userModel.isRegistering$;
 
   registerForm = this.fb.group({
@@ -29,6 +27,8 @@ export class RegisterComponent {
     phoneNumber: ['', phoneNumberValidators],
     isMale: ''
   });
+
+  registerFailure: null | string = null;
 
   get unconfirmedPasswords() {
     return this.registerForm.get('passwords')?.hasError('confirmPasswords');
@@ -62,7 +62,7 @@ export class RegisterComponent {
       .subscribe(() => this.router.navigate(['/']));
 
     this.userModel.registerUserFailure$.pipe(first())
-      .subscribe(({ error }) => this.registerFailure$$.next(this.errorHelper.getApiError(error)));
+      .subscribe(({ error }) => this.registerFailure = this.errorHelper.getApiError(error));
   }
 
   cancelHandler() {

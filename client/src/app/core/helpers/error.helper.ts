@@ -16,7 +16,7 @@ export class ErrorHelper {
       || error.error;
 
     return typeof errMessage !== 'string'
-      ? defaultErrorMessage
+      ? defaultMessage
       : errMessage;
   }
 }
